@@ -1,21 +1,32 @@
-"use client"
+"use client";
 
 import { addTodo } from "@/actions/actions";
 import React from "react";
+import Button from "./Button";
 
 export default function Form() {
+  const ref = React.useRef<HTMLFormElement>(null);
+  // The recommendation is to write a function in actions
+  // change action={addTodo} to action={() => ...}
   return (
-    <form action={addTodo} className="flex flex-col w-[300px] my-16">
+    <form
+      ref={ref}
+      action={async (formData) => {
+        ref.current?.reset();
+
+        await addTodo(formData);
+      }}
+      className="flex flex-col w-[300px] my-16"
+    >
       <input
         type="text"
         name="content"
         className="px-4 py-2 mb-3"
         placeholder="Write your todo..."
         required
+        autoComplete="off"
       />
-      <button className="bg-blue-500 rounded px-4 py-2 text-white font-semibold">
-        Add
-      </button>
+      <Button />
     </form>
   );
 }
