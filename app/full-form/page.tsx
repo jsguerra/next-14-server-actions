@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { upload } from "../actions/actions";
+import { upload } from "@/actions/actions";
 
 export default function Page() {
   const [thumbnail, setThumbnail] = useState("");
